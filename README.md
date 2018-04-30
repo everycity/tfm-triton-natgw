@@ -16,6 +16,7 @@ module "natgw" {
 
   TODO
 }
+```
 
 ## Input
 

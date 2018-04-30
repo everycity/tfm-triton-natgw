@@ -6,7 +6,7 @@ module "label" {
   stage      = "${var.stage}"
   delimiter  = "${var.delimiter}"
   attributes = "${var.attributes}"
-  tags       = "merge(${var.tags}, map("role", "nat-gw"))"
+  tags       = "merge("${var.tags}", map("role", "nat-gw"))"
 }
 
 data "triton_image" "image" {

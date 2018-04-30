@@ -28,7 +28,9 @@ variable "tags" {
 variable "network_public" {}
 variable "network_private" {}
 
-variable "ucarp_vhid" {}
+variable "ucarp_vhid" {
+  default = "1"
+}
 variable "ucarp_pass" {}
 variable "ucarp_vip" {}
 

@@ -25,7 +25,7 @@ been provisioned in order for ucarp to work correctly.
 
 <!--------------------------------REQUIRE POSTPROCESSING-------------------------------->
 |  Name |  Default  |  Description  |
-|:------|:---------:|:--------------:|
+|:------|:----------|:--------------|
 | attributes |[] | Additional attributes (e.g. `policy` or `role`)|
 | delimiter |"-" | Delimiter to be used between `name`, `namespace`, `stage`, etc.|
 | enabled |"true" | Set to false to prevent the module from creating any resources|

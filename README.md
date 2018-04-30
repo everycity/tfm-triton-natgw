@@ -1,12 +1,29 @@
 # terraform-triton-natgw
 
-Terraform module for provisioning a HA pair of ucarp NAT gateway instances
+Terraform module for provisioning a HA pair of ucarp NAT gateway instances.
+
+<aside class="notice">
+Note: Due to ucarp's requirement for multicast, the private network cannot
+be a fabric network. There is a fork of ucarp which supports UDP unicast
+which can be used as an alternative (https://github.com/zevenet/ucarp),
+with the obvious downsides being that you have to build it, and you have
+to specify the partner UDP IP addresses, which can't be done in one pass
+with terraform.
+</aside>
 
 ## Usage
 
 Include this repository as a module in your existing terraform code:
 
 ```hcl
+data "triton_network" "public" {
+        name = "public"
+}
+
+data "triton_network" "private" {
+        name = "private"
+}
+
 module "natgw" {
   source	= "git::https://github.com:everycity/terraform-triton-natgw.git?ref=master"
   namespace	= "global"
@@ -14,12 +31,19 @@ module "natgw" {
   stage		= "prod"
   attributes	= "natgw"
 
-  TODO
+  network_public  = "${data.triton_network.public.id}"
+  network_private = "${data.triton_network.private.id}"
+
+  ucarp_vhid  = "1"
+  ucarp_pass  = "password"
+  ucarp_vip   = "192.168.0.254"
 }
 ```
 
+<aside class="warning">
 You will need to set allow_ip_spoofing and allow_mac_spoofing on the instances after they have
 been provisioned in order for ucarp to work correctly.
+</aside>
 
 ## Input
 

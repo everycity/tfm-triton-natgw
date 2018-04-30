@@ -6,7 +6,7 @@ module "label" {
   stage      = "${var.stage}"
   delimiter  = "${var.delimiter}"
   attributes = "${var.attributes}"
-  tags       = "merge("${var.tags}", map("role", "nat-gw"))"
+  tags       = "${merge("${var.tags}", map("role", "nat-gw"))}"
 }
 
 data "triton_image" "image" {
@@ -16,7 +16,7 @@ data "triton_image" "image" {
 }
 
 data "template_file" "user_script" {
-  template     = "${file("user_script.sh")}"
+  template     = "${file("${path.module}/user_script.sh")}"
 
   vars {
     ucarp_vhid = "${var.ucarp_vhid}"
